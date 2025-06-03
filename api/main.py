@@ -16,29 +16,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Get the directory of the current file
-current_dir = os.path.dirname(os.path.abspath(__file__))
-# Load student marks data from the same directory as this file
-with open(os.path.join(current_dir, 'q-vercel-python.json')) as f:
-    students_data = json.load(f)
+# # Get the directory of the current file
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# # Load student marks data from the same directory as this file
+# with open(os.path.join(current_dir, 'q-vercel-python.json')) as f:
+#     students_data = json.load(f)
 
-@app.get("/api")
-async def get_marks(name: List[str] = Query(None)):
-    """
-    Get marks for one or more students by name.
-    Example: /api?name=John&name=Alice
-    """
-    if not name:
-        return {"error": "Please provide at least one name"}
+# @app.get("/api")
+# async def get_marks(name: List[str] = Query(None)):
+#     """
+#     Get marks for one or more students by name.
+#     Example: /api?name=John&name=Alice
+#     """
+#     if not name:
+#         return {"error": "Please provide at least one name"}
     
-    marks = []
-    for student_name in name:
-        # Look for the student in the data
-        mark = next((student["marks"] for student in students_data 
-                     if student["name"].lower() == student_name.lower()), None)
-        marks.append(mark)
+#     marks = []
+#     for student_name in name:
+#         # Look for the student in the data
+#         mark = next((student["marks"] for student in students_data 
+#                      if student["name"].lower() == student_name.lower()), None)
+#         marks.append(mark)
     
-    return {"marks": marks}
+#     return {"marks": marks}
 
 @app.get("/")
 async def root():
